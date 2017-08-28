@@ -3,6 +3,8 @@ const { JSDOM } = jsdom;
 
 var URL = 'https://www.cs.mcgill.ca/academic/courses';
 
+var data = {};
+
 JSDOM.fromURL(URL).then(parseHtml);
 
 function parseHtml(dom) {
@@ -12,7 +14,9 @@ function parseHtml(dom) {
   var children = courses.children;
 
   // every 2 children is a complete course
-  for(var i=0; i < children.length - 1; i++) {
-    // do we have more dom methods on these..?
+  for(var i=0; i < children.length - 1; i+=2) {
+    var code = children[i].id;
+    data[code] = {code: code};
   }
+  console.log(JSON.stringify(data, null, 2));
 }
