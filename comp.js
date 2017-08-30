@@ -18,7 +18,9 @@ function parseHtml(dom) {
     var code = children[i].id;
     data[code] = {code: code};
     var prereqs = children[i+1].children[1].children[3].textContent.split("Prerequisites: ")[1];
+
     prereqs = prereqs.trim().replace('.','').split(", ");
+    prereqs = !prereqs[0] ? [] : prereqs
     data[code].prereqs = prereqs;
   }
   console.log(JSON.stringify(data,null,2));
