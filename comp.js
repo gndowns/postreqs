@@ -22,6 +22,14 @@ function parseHtml(dom) {
     prereqs = prereqs.trim().replace('.','').split(", ");
     prereqs = !prereqs[0] ? [] : prereqs
     data[code].prereqs = prereqs;
+    // look for comp pre reqs
+    for(var j=0; j<prereqs.length; j++) {
+      comp_pres = prereqs[j].split("COMP ");
+      if(comp_pres.length > 1) {
+        console.log(comp_pres[1].split()[0]);
+      }
+      console.log();
+    }
   }
-  console.log(JSON.stringify(data,null,2));
+  // console.log(JSON.stringify(data,null,2));
 }
