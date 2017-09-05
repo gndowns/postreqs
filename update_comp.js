@@ -1,11 +1,21 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
+var courseTree = openTree();
+
 var URL = 'https://www.cs.mcgill.ca/academic/courses';
 
 var data = {};
 
 JSDOM.fromURL(URL).then(parseHtml);
+
+function openTree() {
+  const PATH = './courseTree.json';
+  try {
+    var tree = require(PATH);
+  } catch(e) {
+  }
+}
 
 function fromCode(code) {
   if(!data[code]) {
