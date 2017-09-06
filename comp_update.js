@@ -48,9 +48,9 @@ function parseHtml(dom) {
     prereqs = prereqs.trim().replace('.','').split(", ");
     prereqs = !prereqs[0] ? [] : prereqs
 
-    var thisCode = 'Comp ' + children[i].id;
-    var thisCourse = fromCode(thisCode);
-    thisCourse.prereqs = prereqs;
+    var thisCourseCode = 'Comp ' + children[i].id;
+    var thisCourseNode = fromCode(thisCourseCode);
+    thisCourseNode.prereqs = prereqs;
 
     // look for comp pre reqs
     for(var j=0; j<prereqs.length; j++) {
@@ -64,7 +64,7 @@ function parseHtml(dom) {
 
         var prereqCourse = fromCode(prereqCode);
 
-        addPostreq(prereqCode, thisCode);
+        addPostreq(prereqCode, thisCourseCode);
       }
     }
   }
