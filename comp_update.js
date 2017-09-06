@@ -48,7 +48,7 @@ function parseHtml(dom) {
     prereqs = prereqs.trim().replace('.','').split(", ");
     prereqs = !prereqs[0] ? [] : prereqs
 
-    var thisCourseCode = 'Comp ' + children[i].id;
+    var thisCourseCode = 'COMP ' + children[i].id;
     var thisCourseNode = fromCode(thisCourseCode);
     thisCourseNode.prereqs = prereqs;
 
