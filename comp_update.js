@@ -54,6 +54,9 @@ function parseHtml(dom) {
 
     // look for comp pre reqs
     for(var j=0; j<prereqs.length; j++) {
+
+      // we need a better way to split prereqs
+      // can't just do it by comp codes
       comp_pres = prereqs[j].split("COMP ");
 
       for(var k=1; k < comp_pres.length; k++) {
