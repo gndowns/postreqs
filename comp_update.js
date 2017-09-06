@@ -48,8 +48,8 @@ function parseHtml(dom) {
     prereqs = prereqs.trim().replace('.','').split(", ");
     prereqs = !prereqs[0] ? [] : prereqs
 
-    var code = children[i].id;
-    var thisCourse = fromCode(code);
+    var thisCode = 'Comp ' + children[i].id;
+    var thisCourse = fromCode(thisCode);
     thisCourse.prereqs = prereqs;
 
     // look for comp pre reqs
@@ -61,10 +61,10 @@ function parseHtml(dom) {
 
         var prereqCourse = fromCode(prereqCode);
 
-        addPostreq(prereqCode, code);
+        addPostreq(prereqCode, thisCode);
       }
     }
   }
   fs.writeFile(TREE_PATH, JSON.stringify(tree,null,2)+'\n');
-  // console.log(JSON.stringify(tree,null,2));
+  console.log(JSON.stringify(tree,null,2));
 }
