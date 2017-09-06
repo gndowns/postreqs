@@ -1,3 +1,4 @@
+const fs = require('file-system');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
@@ -10,10 +11,11 @@ var data = {};
 JSDOM.fromURL(URL).then(parseHtml);
 
 function openTree() {
-  const PATH = './courseTree.json';
+  const PATH = './tree.json';
   try {
     var tree = require(PATH);
   } catch(e) {
+    fs.writeFileSync(PATH, '');
   }
 }
 
@@ -62,5 +64,5 @@ function parseHtml(dom) {
       }
     }
   }
-  console.log(JSON.stringify(data,null,2));
+  // console.log(JSON.stringify(data,null,2));
 }
