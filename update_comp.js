@@ -2,6 +2,8 @@ const fs = require('file-system');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
+const TREE_PATH = './tree.json';
+
 var tree = openTree();
 
 var URL = 'https://www.cs.mcgill.ca/academic/courses';
@@ -9,9 +11,8 @@ var URL = 'https://www.cs.mcgill.ca/academic/courses';
 JSDOM.fromURL(URL).then(parseHtml);
 
 function openTree() {
-  const PATH = './tree.json';
   try {
-    var tree = require(PATH);
+    var tree = require(TREE_PATH);
   } catch(e) {
     var tree = {};
     fs.writeFileSync(PATH, JSON.stringify(tree));
@@ -64,5 +65,6 @@ function parseHtml(dom) {
       }
     }
   }
-  console.log(JSON.stringify(tree,null,2));
+  fs.writeFile(TREE_PATH, JSON.stringify(tree,null,2)+'\n');
+  // console.log(JSON.stringify(tree,null,2));
 }
