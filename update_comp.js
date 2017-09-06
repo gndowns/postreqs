@@ -2,11 +2,9 @@ const fs = require('file-system');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-var courseTree = openTree();
+var tree = openTree();
 
 var URL = 'https://www.cs.mcgill.ca/academic/courses';
-
-var data = {};
 
 JSDOM.fromURL(URL).then(parseHtml);
 
@@ -15,18 +13,20 @@ function openTree() {
   try {
     var tree = require(PATH);
   } catch(e) {
-    fs.writeFileSync(PATH, '');
+    var tree = {};
+    fs.writeFileSync(PATH, JSON.stringify(tree));
   }
+  return tree;
 }
 
 function fromCode(code) {
-  if(!data[code]) {
-    data[code] = {
+  if(!tree[code]) {
+    tree[code] = {
       code: code,
       postreqs: []
     };
   }
-  return data[code];
+  return tree[code];
 }
 
 function addPostreq(code, postreqCode) {
@@ -64,5 +64,5 @@ function parseHtml(dom) {
       }
     }
   }
-  // console.log(JSON.stringify(data,null,2));
+  console.log(JSON.stringify(tree,null,2));
 }
